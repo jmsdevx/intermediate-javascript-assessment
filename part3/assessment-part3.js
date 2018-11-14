@@ -13,8 +13,13 @@
 // return the result of your updateAnimal invocation
 
 // CODE HERE...
-
-
+function callBinding(magicAnimals, updateAnimal, id) {
+  this.updateAnimal = updateAnimal.bind(this);
+  let animal = magicAnimals.find((e, i, a) => {
+    e == id;
+  });
+  return updateAnimal("Trogdor");
+}
 
 // *************
 // * PROBLEM 2 *
@@ -28,8 +33,15 @@
 // return the result of your updateAnimal invocation
 
 // CODE HERE...
+function applyBinding(magicAnimals, updateAnimal, id) {
+  this.updateAnimal = updateAnimal.bind(this);
+  let animal = magicAnimals.find((e, i, a) => e == id);
 
-
+  return this.updateAnimal.apply(magicAnimals, [
+    "being majestic",
+    "eating rainbows"
+  ]);
+}
 
 // *************
 // * PROBLEM 3 *
@@ -48,8 +60,17 @@
 var foo;
 
 // CODE HERE...
-
-
+function promiseMe($q) {
+  let promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      foo = "bar";
+    }, 20);
+    {
+      resolve(foo);
+    }
+  });
+  return promise.then(data => data);
+}
 
 // *************
 // * PROBLEM 4 *
@@ -64,3 +85,11 @@ var foo;
 // and then resolve the array as you complete your promise.
 
 // CODE HERE...
+function emailList($q, $http){
+    var users = []
+    let promise = new Promise((resolve, reject)=> {
+        $http('/api/users').then(
+            response => users = response.data
+        )
+    }
+}
